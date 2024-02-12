@@ -1,7 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/sequelize";
 import { Labs } from "./labs.models";
-import { Op, QueryTypes } from "sequelize";
+import { QueryTypes } from "sequelize";
 import { CreateLabsDto, LabsFilterDto, UpdateLabDto } from "./dto/labs-dto";
 
 @Injectable()

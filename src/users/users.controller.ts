@@ -5,7 +5,6 @@ import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagg
 import { User } from "./users.model";
 import { Roles } from "../auth/roles-auth.decorator";
 import { RolesGuard } from "../auth/role.guard";
-import { LabsFilterDto, UpdateLabDto } from "../labs/dto/labs-dto";
 
 @ApiTags('Пользователи')
 @ApiBearerAuth()
