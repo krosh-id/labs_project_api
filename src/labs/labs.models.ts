@@ -4,6 +4,8 @@ import { ApiProperty } from "@nestjs/swagger";
 interface LabCreationAtrrs{
   subject: string;
   count: number;
+  course: number;
+  description: string;
 }
 
 @Table({tableName: 'labs_subject'})

@@ -1,9 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from "@nestjs/sequelize";
-import { User } from "../users/users.model";
 import { Labs } from "./labs.models";
-import { QueryTypes } from "sequelize";
-import { CreateLabsDto } from "./dto/labs-dto";
+import { Op} from "sequelize";
+import { CreateLabsDto, LabsFilterDto } from "./dto/labs-dto";
 
 @Injectable()
 export class LabsService {
@@ -14,7 +13,15 @@ export class LabsService {
     return await this.labsRepository.create(dto);
   }
 
-  async getLabsAll(): Promise<Labs[]> {
-    return await this.labsRepository.findAll()
+  async getLabsAll(filter: LabsFilterDto){
+    if (filter.subject) {
+      filter.subject = { [Op.substring]: filter.subject };
+    }
+
+    return await this.labsRepository
+      .findAndCountAll({
+        where: { ...filter },
+        order: ['createdAt'],
+      });
   }
 }
