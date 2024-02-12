@@ -27,5 +27,27 @@ export class LabsFilterDto {
   @ApiPropertyOptional({ example: 'Название предмета', type: String })
   @IsOptional()
   @IsString()
-  subject?: object;
+  subject?: string;
+}
+
+export class UpdateLabDto{
+  @ApiPropertyOptional({ example: 'Название предмета', type: String })
+  @IsOptional()
+  @IsString()
+  subject?: string;
+
+  @ApiPropertyOptional({ example: 3, type: Number })
+  @IsOptional()
+  @IsNumber()
+  course?: number;
+
+  @ApiPropertyOptional({ example: 5, type: Number })
+  @IsOptional()
+  @IsNumber()
+  mark?: number;
+
+  @ApiPropertyOptional({ example: 'Описание предмета', type: String })
+  @IsOptional()
+  @IsString()
+  description?: string;
 }

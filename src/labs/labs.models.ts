@@ -1,5 +1,6 @@
-import { Column, DataType, Model, Table } from "sequelize-typescript";
+import { BelongsTo, Column, DataType, ForeignKey, Model, Table } from "sequelize-typescript";
 import { ApiProperty } from "@nestjs/swagger";
+import { User } from "../users/users.model";
 
 interface LabCreationAtrrs{
   subject: string;
@@ -8,7 +9,7 @@ interface LabCreationAtrrs{
   description: string;
 }
 
-@Table({tableName: 'labs_subject'})
+@Table({tableName: 'labs_subject', createdAt: false, updatedAt: false})
 export class Labs extends Model<Labs, LabCreationAtrrs>{
   @ApiProperty({example: 1, description: 'Уникальный айди лабы'})
   @Column({
@@ -43,4 +44,11 @@ export class Labs extends Model<Labs, LabCreationAtrrs>{
   )
   @Column({ type: DataType.STRING, allowNull: true})
   description: string;
+
+  @BelongsTo(()=> User)
+  author: User;
+
+  @ForeignKey(()=> User)
+  @Column({type: DataType.INTEGER})
+  user_id: number
 }
