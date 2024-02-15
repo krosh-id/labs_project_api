@@ -15,7 +15,7 @@ export class UsersService {
   async createUser(dto: CreateUserDto): Promise<User>{
     dto.password = await bgrypt.hash(dto.password, 5)
     const user = await this.userRepository.create(dto)
-    const role = await this.roleService.getRoleByValue('TEACHER')
+    const role = await this.roleService.getRoleByValue('STUDENT')
     await user.$set('roles', [role.id])
     user.roles = [role]
     return user;

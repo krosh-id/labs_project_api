@@ -12,6 +12,6 @@ import { AuthModule } from "../auth/auth.module";
     SequelizeModule.forFeature([Labs]),
     forwardRef(() => AuthModule),
   ],
-  exports: [LabsController]
+  exports: []
 })
 export class LabsModule {}

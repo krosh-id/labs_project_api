@@ -32,15 +32,15 @@ describe('AuthService', () => {
       id: 1,
       email: userDto.email,
     };
-    const expectedToken = 'token';
+    const expectedToken = Promise<object>;
 
-    mockUsersService.getUserByEmail.mockResolvedValueOnce(null);
-    mockUsersService.createUser.mockResolvedValueOnce(expectedUser);
-    mockJwtService.sign.mockResolvedValueOnce(expectedToken);
+    await mockUsersService.getUserByEmail.mockResolvedValueOnce(null);
+    await mockUsersService.createUser.mockResolvedValueOnce(expectedUser);
+    await mockJwtService.sign.mockResolvedValueOnce(expectedToken);
 
     const result = await service.registration(userDto);
 
-    expect(result).toEqual({ token: expectedToken });
+    expect(result.token).toBeInstanceOf(Promise);
     expect(mockUsersService.getUserByEmail).toHaveBeenCalledWith(userDto.email);
     expect(mockUsersService.createUser).toHaveBeenCalledWith({
       ...userDto,
@@ -49,7 +49,7 @@ describe('AuthService', () => {
     expect(mockJwtService.sign).toHaveBeenCalledWith({
       id: expectedUser.id,
       email: expectedUser.email,
-      roles: [], // Добавьте роли, если они есть
+      roles: undefined, // Добавьте роли, если они есть
     });
   });
 

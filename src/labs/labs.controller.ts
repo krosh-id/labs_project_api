@@ -5,6 +5,7 @@ import { CreateLabsDto, LabsFilterDto, UpdateLabDto } from "./dto/labs-dto";
 import { LabsService } from "./labs.service";
 import { Roles } from "../auth/roles-auth.decorator";
 import { RolesGuard } from "../auth/role.guard";
+import { Labs } from "./labs.models";
 
 @ApiTags('Лабораторные работы')
 @ApiBearerAuth()
@@ -23,7 +24,7 @@ export class LabsController {
   }
 
   @ApiOperation({ summary: 'Получения всех лабораторных' })
-  @ApiResponse({status: 200, type: [User]})
+  @ApiResponse({status: 200, type: [Labs]})
   @Roles("STUDENT", "TEACHER")
   @UseGuards(RolesGuard)
   @Get('/')
@@ -32,7 +33,7 @@ export class LabsController {
   }
 
   @ApiOperation({ summary: 'Удаление лабораторной по id' })
-  @ApiResponse({status: 200, type: [User]})
+  @ApiResponse({status: 200, type: [Labs]})
   @Roles("TEACHER")
   @UseGuards(RolesGuard)
   @Delete('/delete/:id')
@@ -41,7 +42,7 @@ export class LabsController {
   }
 
   @ApiOperation({ summary: 'Обновление лабораторной по id' })
-  @ApiResponse({status: 200, type: [User]})
+  @ApiResponse({status: 200, type: [Labs]})
   @Roles("TEACHER")
   @UseGuards(RolesGuard)
   @Patch('/update/:id')
